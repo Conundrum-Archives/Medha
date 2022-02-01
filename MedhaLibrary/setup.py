@@ -17,22 +17,26 @@ version = '2.0.' + build_datetime.strftime("%Y%m%d.%H%M%S")
 print("version: {}".format(version))
 
 # write build details to version.txt
-with open(os.path.join("src", "medhaboard", "version.txt"), "w") as vfl:
-    details = """
-    Version: {version}
-    Date: {date}
-    """.format(version=version, date=build_datetime)
+with open(os.path.join("src", "medhalib", "version.txt"), "w") as vfl:
+    details = str("""Version: {version} [Date: {date}]""").format(version=version, date=build_datetime)
     vfl.write(details)
 
 setup(
-  name = 'medharover',
+  name = 'medhalib',
   version=version,
   license='MIT',
   author="ConundrumArchives",
-  author_email="nikhiltanni.githubemail@github.com",
+  author_email="team@conundrumarchives.space",
   packages=find_packages('src', exclude="tests"),
-  package_data={'': ['src/medhaboard/version.txt']},
   package_dir={'': 'src'},
+  data_files=[
+    ('', ["src/medhalib/version.txt"])
+  ],
+  include_package_data=True,
+  tests_require = [
+    "pytest"
+  ],
+  test_suite="tests",
   url='https://conundrumarchives.org/medha',
   keywords='Conundrum Archives Medha'
 )

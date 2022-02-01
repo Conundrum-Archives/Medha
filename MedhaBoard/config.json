@@ -1,0 +1,13 @@
+{
+    "server": {
+        "port": 5000,
+        "serverdebug": true,
+        "devdebug": true
+    },
+    "board_bcmpin": {
+        "ultrasonicsensor_trig": 1,
+        "ultrasonicsensor_echo": 2,
+        "baseservo": 3,
+        "upperservo": 4
+    }
+}

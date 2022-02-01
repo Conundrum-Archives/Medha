@@ -1,5 +1,14 @@
+import os
 import base64
-from picamera import PiCamera
+
+
+# import mock while in development/debug mode
+if ("DEBUGMODE" in os.environ):
+  import sys
+  import fake_rpi
+  sys.modules['picamera'] = fake_rpi.picamera
+else:
+  from picamera import PiCamera
 
 class CameraModule:
 
