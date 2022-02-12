@@ -1,0 +1,44 @@
+{
+  "application1": {
+    "data_dir": "datadir",
+    "clean_data_dir_always": true,
+    "scan_config": {
+      "baseservo_start_angle": 0,
+      "upperservo_start_angle": 0,
+      "baseservo_sampling": 10,
+      "upperservo_sampling": 10,
+      "proceed_always": true
+    },
+    "operating_device": {
+      "base_url": "http://127.0.0.1:5000",
+      "modules": {
+        "baseservo": {
+          "enabled": false,
+          "min_angle": 0,
+          "max_angle": 180
+        },
+        "upperservo": {
+          "enabled": false,
+          "min_angle": 0,
+          "max_angle": 180
+        },
+        "camera": {
+          "enabled": false,
+          "capture_settings": {
+            "resWidth": "820",
+            "resHeight": "616",
+            "rotate": "270",
+            "captureFile": "capture.jpg",
+            "getbase64": "true"
+          }
+        }
+      },
+      "end_points": {
+        "baseservo": "/setServoAngle/BaseServo",
+        "upperservo": "/setServoAngle/UpperServo",
+        "ussdistance": "/getDistance",
+        "imagecapture": "/captureImage"
+      }
+    }
+  }
+}
