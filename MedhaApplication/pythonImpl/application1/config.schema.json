@@ -1,0 +1,95 @@
+{
+  "type": "object",
+  "properties": {
+    "data_dir": {"type": "string"},
+    "clean_data_dir_always": {"type": "boolean"},
+    "scan_config": {
+      "type": "object",
+      "properties": {
+        "baseservo_start_angle": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "upperservo_start_angle": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "baseservo_sampling": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "upperservo_sampling": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "proceed_always": {"type": "boolean"}
+      }
+    },
+    "operating_device": {
+      "type": "object",
+      "properties": {
+        "base_url": {"type": "string"},
+        "modules": {
+          "type": "object",
+          "properties": {
+            "baseservo": {
+              "type": "object",
+              "properties": {
+                "enabled": {"type": "boolean"},
+                "min_angle": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 360
+                },
+                "max_angle": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 360
+                }
+              }
+            },
+            "upperservo": {
+              "type": "object",
+              "properties": {
+                "enabled": {"type": "boolean"},
+                "min_angle": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 360
+                },
+                "max_angle": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 360
+                }
+              }
+            },
+            "camera": {
+              "type": "object",
+              "properties": {
+                "enabled": {"type": "boolean"},
+                "capture_settings": {
+                  "type": "object",
+                  "properties": {
+                    "resWidth": {"type": "string"},
+                    "resHeight": {"type": "string"},
+                    "rotate": {"type": "string"},
+                    "captureFile": {"type": "string"},
+                    "getbase64": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "end_points": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

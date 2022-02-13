@@ -1,10 +1,8 @@
 import logging
-import coloredlogs
 
-LOGGER_NAME = "MedhaApplication"
+LOGGER_NAME = "MedhaDeviceMock"
 METHOD_ENTRY = "Entered method"
 METHOD_EXIT = "Exit method"
-
 
 def init_logger():
     logging.getLogger("paramiko").setLevel(logging.DEBUG)
@@ -18,12 +16,4 @@ def init_logger():
             logging.StreamHandler()
         ]
     )
-
-    # logging.getLogger(LOGGER_NAME).addHandler(TqdmLoggingHandler())
-    
-    coloredlogs.install(level='DEBUG')
-    logging.getLogger("urllib3").setLevel(logging.WARNING)
-    logging.getLogger("requests").setLevel(logging.WARNING)
-    logging.getLogger('matplotlib.font_manager').disabled = True
-    logging.getLogger('PIL.PngImagePlugin').disabled = True
     return logging.getLogger(LOGGER_NAME)

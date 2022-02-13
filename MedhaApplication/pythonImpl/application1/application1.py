@@ -18,6 +18,9 @@ import pyfiglet
 import requests
 import numpy as np
 import matplotlib.pyplot as plt
+
+# append parent directory for utils
+sys.path.append('../')
 from Utils.Config import get_app_config
 from Utils.LogModule import init_logger
 from Utils.application1_util1 import request_handler
@@ -34,7 +37,7 @@ APPLICATION_NAME = "Dome_Top_180x180"
 try:
   f = pyfiglet.Figlet(font='banner3-D')
   print(f.renderText(" MEDHA "))
-except:
+except Exception as e:
   log.warning("MEDHA")
 
 # exit handler
@@ -42,14 +45,16 @@ def exit_handler():
   log.info("Program: {appname} is exiting now\n\n{appname} message: See you soon untill then good bye!!".format(appname=APPLICATION_NAME))
 atexit.register(exit_handler)
 
-# read config
-config = get_app_config(APPLICATION_ID)
+log.info("starting application: {appname} [ID:{appid}]".format(appname=APPLICATION_NAME, appid=APPLICATION_ID))
 
+# read application config
+config = get_app_config(app_id=APPLICATION_ID, checkkey=True)
+
+# specify data dir variable
 data_dir = config["data_dir"] if "data_dir" in config else "datadir_default"
 
-
-log.info("starting application: {appname} [ID:{appid}]".format(appname=APPLICATION_NAME, appid=APPLICATION_ID))
 log.info("data directory is set to: {datadir}".format(datadir=data_dir))
+
 
 # setup / clean data directory to save run-time data
 if (os.path.exists(data_dir)):
@@ -73,7 +78,7 @@ req_handler = None
 try:
   req_handler = request_handler(APPLICATION_ID)
 except Exception as e:
-  log.error("Something went wrong while checking base_url. Check if controller on device in running and same host:port is configured in this configurations")
+  log.error("Something went wrong while checking base_url.\n\n* Check if controller on device (or mock controller) is running\n* Check if host:port is configured correctly in this configurations\n")
   sys.exit(0)
 
 log.info("starting {appname}".format(appname=APPLICATION_NAME))
@@ -85,6 +90,7 @@ else:
   log.info("proceedAlways is disabled. The program will ask for confirmaton before continuing")
 
 
+# read config for samples and ranges for servos
 start_angle_h=config["scan_config"]["baseservo_start_angle"]
 start_angle_v=config["scan_config"]["upperservo_start_angle"]
 steph = config["scan_config"]["baseservo_sampling"]
@@ -99,16 +105,17 @@ if (start_angle_v < config["operating_device"]["modules"]["upperservo"]["min_ang
   raise ValueError("upperservo_start_angle cannot be less than minimum angle of upperservo")
 
 
+
+
 # define visualizer
 plt.title("Scan Visualizaton")
 plt.interactive(True)
 plt.grid()
 
-
+# start horizontal loop
 for h in range(start_angle_h, extenth+steph, steph):
   proceed_flag1 = b"r"
   angleresp2 = {}
-  uid = uuid.uuid4().hex
   
   while(proceed_flag1.decode() == "r"):
     angleresp2 = req_handler.set_baseservo_angle(h)
@@ -119,10 +126,12 @@ for h in range(start_angle_h, extenth+steph, steph):
       time.sleep(1)
       break
 
+  # start vertical loop
   for v in range(start_angle_v, extentv+int(stepv/2), stepv):
 
     proceed_flag1 = b"r"
     angleresp = {}
+    uid = uuid.uuid4().hex
 
     while(proceed_flag1.decode() == "r"):
       angleresp = req_handler.set_upperservo_angle(v)

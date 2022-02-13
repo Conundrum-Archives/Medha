@@ -13,21 +13,21 @@
       "base_url": "http://127.0.0.1:5000",
       "modules": {
         "baseservo": {
-          "enabled": false,
+          "enabled": true,
           "min_angle": 0,
           "max_angle": 180
         },
         "upperservo": {
-          "enabled": false,
+          "enabled": true,
           "min_angle": 0,
           "max_angle": 180
         },
         "camera": {
           "enabled": false,
           "capture_settings": {
-            "resWidth": "820",
-            "resHeight": "616",
-            "rotate": "270",
+            "resWidth": "MAX",
+            "resHeight": "MAX",
+            "rotate": "0",
             "captureFile": "capture.jpg",
             "getbase64": "true"
           }
