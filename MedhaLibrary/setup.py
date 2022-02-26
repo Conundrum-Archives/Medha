@@ -1,5 +1,6 @@
 import os
 import shutil
+import time
 import datetime
 from setuptools import setup, find_packages
 
@@ -13,7 +14,7 @@ if (os.path.exists(distdir)):
 
 # timestampted version suffix
 build_datetime = datetime.datetime.now()
-version = '2.0.' + build_datetime.strftime("%Y%m%d.%H%M%S")
+version = '2.0.1'
 print("version: {}".format(version))
 
 # write build details to version.txt
