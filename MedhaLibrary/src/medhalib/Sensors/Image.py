@@ -6,7 +6,10 @@ import base64
 if ("DEBUGMODE" in os.environ):
   import sys
   import fake_rpi
-  sys.modules['picamera'] = fake_rpi.picamera
+  try:
+    from picamera import PiCamera
+  except:
+    sys.modules['picamera'] = fake_rpi.picamera
 else:
   from picamera import PiCamera
 

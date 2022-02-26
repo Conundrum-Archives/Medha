@@ -1,4 +1,5 @@
 pytest
+coverage
 Flask==2.0.2
 fake-rpi==0.7.1
 Mock.GPIO==0.1.8

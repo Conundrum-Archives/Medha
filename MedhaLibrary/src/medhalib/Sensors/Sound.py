@@ -1,7 +1,7 @@
 import gc
 import os
 import time
-import medhaboard.Utils.LogModules as LogModule
+import medhalib.Utils.LogModules as LogModule
 
 # import mock while in development/debug mode
 if ("DEBUGMODE" in os.environ):
